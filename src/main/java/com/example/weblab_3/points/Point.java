@@ -1,83 +1,87 @@
 package com.example.weblab_3.points;
 
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Objects;
+public class Point {
+    private float coordX;
+    private float coordY;
+    private float x;
+    private float y;
+    private boolean hitValue;
 
-@Entity
-public class Point implements Serializable {
-    @Id
-    @SequenceGenerator(name = "jpaSequence", sequenceName = "JPA_SEQUENCE", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "jpaSequence")
-    private int id;
-    private Double xValue;
-    private Double yValue;
-    private Integer rValue;
-    private String hitResult;
-
-    public Point() { }
-
-    public int getId() {
-        return id;
+    public Point(float x, float y, boolean hitValue) {
+        this.x = x;
+        this.y = y;
+        this.hitValue =hitValue;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void calculateCoordinates(float r){
+        convertToCoordinates(r);
+    }
+    public void convertToCoordinates(float r) {
+        float tempCY = convertToCoordinate(y, r);
+        float tempCX = convertToCoordinate(x, r);
+        setCoordsSystemX(tempCX);
+        setCoordsSystemY(tempCY);
     }
 
-    public Double getxValue() {
-        return xValue;
+    public void setCoordsSystemX(float coordX) {
+        float centerX = 150;
+        if (coordX < 0) {
+            this.coordX = centerX - (-coordX);
+        } else {
+            this.coordX = centerX+coordX;
+        }
     }
 
-    public void setxValue(Double xValue) {
-        this.xValue = xValue;
+    public void setCoordsSystemY(float coordY) {
+        float centerY = 150;
+        if (coordY < 0) {
+            this.coordY = (-(coordY) + centerY);
+        } else {
+            this.coordY = centerY - coordY;
+        }
     }
 
-    public Double getyValue() {
-        return yValue;
+    public float convertToCoordinate(float value, float r) {
+        return (value * 120) / r;
     }
 
-    public void setyValue(Double yValue) {
-        this.yValue = yValue;
+    public boolean isHitValue() {
+        return hitValue;
     }
 
-    public Integer getrValue() {
-        return rValue;
+    public void setHitValue(boolean hitValue) {
+        this.hitValue = hitValue;
     }
 
-    public void setrValue(Integer rValue) {
-        this.rValue = rValue;
+    public float getX() {
+        return x;
     }
 
-    public String getHitResult() {
-        return hitResult;
+    public void setX(float x) {
+        this.x = x;
     }
 
-    public void setHitResult(String hitResult) {
-        this.hitResult = hitResult;
+    public float getY() {
+        return y;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Point point = (Point) o;
-        return id == point.id && Objects.equals(xValue, point.xValue) && Objects.equals(yValue, point.yValue) && Objects.equals(rValue, point.rValue) && Objects.equals(hitResult, point.hitResult);
+    public void setY(float y) {
+        this.y = y;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, xValue, yValue, rValue, hitResult);
+    public float getCoordX() {
+        return coordX;
     }
 
-    @Override
-    public String toString() {
-        return "Point{" +
-                "id=" + id +
-                ", xValue=" + xValue +
-                ", yValue=" + yValue +
-                ", rValue=" + rValue +
-                ", hitResult='" + hitResult + '\'' +
-                '}';
+    public void setCoordX(float coordX) {
+        this.coordX = coordX;
+    }
+
+    public float getCoordY() {
+        return coordY;
+    }
+
+    public void setCoordY(float coordY) {
+        this.coordY = coordY;
     }
 }

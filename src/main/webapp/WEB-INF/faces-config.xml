@@ -4,26 +4,25 @@
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
                                   http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
     <navigation-rule>
-        <from-view-id>/index.xhtml</from-view-id>
+        <from-view-id>*</from-view-id>
         <navigation-case>
-            <from-outcome>goToMain</from-outcome>
-            <to-view-id>/main.xhtml</to-view-id>
+            <from-outcome>app</from-outcome>
+            <to-view-id>/app.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
-
-    </navigation-rule>
-
-    <navigation-rule>
-        <from-view-id>/main.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>goToIndex</from-outcome>
+            <from-outcome>index</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
-        <navigation-case>
-            <from-outcome>redirect</from-outcome>
-            <to-view-id>/main.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
     </navigation-rule>
+    <managed-bean>
+        <managed-bean-name>pointsBean</managed-bean-name>
+        <managed-bean-class>com.example.weblab_3.points.PointBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <validator>
+        <validator-id>commonValidator</validator-id>
+        <validator-class>com.example.weblab_3.utilities.СommonValidator</validator-class>
+    </validator>
 </faces-config>
